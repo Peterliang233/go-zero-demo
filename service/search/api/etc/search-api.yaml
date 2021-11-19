@@ -1,0 +1,17 @@
+Name: search-api
+Host: 0.0.0.0
+Port: 8090
+Mysql:
+  DataSource: root:mysqlpassword@tcp(127.0.0.1:3306)/test?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+CacheRedis:
+  - Host: localhost:6379
+    Pass: redispassword
+    Type: node
+Auth:
+  AccessSecret: "131312313"
+  AccessExpire: 6000
+UserRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: user.rpc
