@@ -29,7 +29,6 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) LoginLogic {
 }
 
 func (l *LoginLogic) Login(req types.LoginReq) (*types.LoginReply, error) {
-	// todo: add your logic here and delete this line
 	if len(strings.TrimSpace(req.Username)) == 0 || len(strings.TrimSpace(req.Password)) == 0 {
 		return nil, errorx.NewDefaultError("参数错误")
 	}

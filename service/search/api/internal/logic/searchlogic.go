@@ -25,7 +25,6 @@ func NewSearchLogic(ctx context.Context, svcCtx *svc.ServiceContext) SearchLogic
 }
 
 func (l *SearchLogic) Search(req types.SearchReq) (*types.SearchReply, error) {
-	// todo: add your logic here and delete this line
 	userIdNumber := json.Number(fmt.Sprintf("%v", l.ctx.Value("userId")))
 	logx.Infof("userId: %s", userIdNumber)
 	userId, err := userIdNumber.Int64()
