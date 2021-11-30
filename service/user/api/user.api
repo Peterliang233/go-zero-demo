@@ -12,9 +12,22 @@ type (
 		AccessExpire int64  `json:"accessExpire"`
 		RefreshAfter int64  `json:"refreshAfter"`
 	}
+
+	IdReq {
+		Id int64 `json:"id"`
+	}
+
+	UserInfoReply {
+		Id     int64  `json:"id"`
+		Name   string `json:"name"`
+		Number string `json:"number"`
+		Gender string `json:"gender"`
+	}
 )
 
 service user-api {
 	@handler login
 	post /user/login (LoginReq) returns (LoginReply)
+	@handler GetUser
+	get /user (IdReq) returns (UserInfoReply)
 }
