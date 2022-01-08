@@ -22,6 +22,5 @@ func NewPingLogic(ctx context.Context, svcCtx *svc.ServiceContext) PingLogic {
 }
 
 func (l *PingLogic) Ping() error {
-
 	return nil
 }
