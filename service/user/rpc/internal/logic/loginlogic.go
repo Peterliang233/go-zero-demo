@@ -25,7 +25,7 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 }
 
 func (l *LoginLogic) Login(in *user.LoginReq) (*user.LoginReply, error) {
-	userInfo, err := l.svcCtx.UserModel.FindOneByName(in.Username)
+	userInfo, err := l.svcCtx.UserModel.FindOneByUsername(in.Username)
 	switch err {
 	case nil:
 	case model.ErrNotFound:
@@ -40,7 +40,7 @@ func (l *LoginLogic) Login(in *user.LoginReq) (*user.LoginReply, error) {
 
 	return &user.LoginReply{
 		Id:     userInfo.Id,
-		Name:   userInfo.Name,
+		Name:   userInfo.Username,
 		Gender: userInfo.Gender,
 	}, nil
 }

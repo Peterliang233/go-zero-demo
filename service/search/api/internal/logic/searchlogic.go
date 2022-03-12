@@ -24,25 +24,21 @@ func NewSearchLogic(ctx context.Context, svcCtx *svc.ServiceContext) SearchLogic
 	}
 }
 
-// 使用rpc调用
 func (l *SearchLogic) Search(req types.SearchReq) (*types.SearchReply, error) {
 	userIdNumber := json.Number(fmt.Sprintf("%v", l.ctx.Value("userId")))
-	logx.Infof("userId: %s", userIdNumber)
+	logx.Infof("userId: %v", l.ctx.Value("userId"))
 	userId, err := userIdNumber.Int64()
 	if err != nil {
 		return nil, err
 	}
-
-	userInfo, err := l.svcCtx.UserRpc.GetUser(l.ctx, &userclient.IdReq{
+	resp, err := l.svcCtx.UserRpc.GetUser(l.ctx, &userclient.IdReq{
 		Id: userId,
 	})
-
 	if err != nil {
 		return nil, err
 	}
-
 	return &types.SearchReply{
-		Name:  userInfo.Name,
+		Name:  resp.Name,
 		Count: 100,
 	}, nil
 }

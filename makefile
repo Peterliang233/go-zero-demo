@@ -1,14 +1,21 @@
 generate-sql-model:
-	cd ./service/user/model; goctl model mysql ddl -src user.sql -dir . -c
+	cd ./service/user/model; \
+	goctl model mysql ddl -src user.sql -dir . -c
 generate-user-api:
-	cd ./service/user/api; goctl api go -api user.api -dir .
-curl:
-	curl -i -X POST \
-	http://localhost:8888/user/login \
-	-H 'Content-Type: application/json' \
-	-d '{ \
-	"username":"666", \
-	"password":"123456" \
-	}'
+	cd ./service/user/api; \
+	goctl api go -api user.api -dir .
+generate-search-api:
+	cd ./service/search/api; \
+	goctl api go -api search.api -dir .
 run-user-api:
-	cd service/user/api; go run user.go -f etc/user-api.yaml
+	cd service/user/api; \
+	go run user.go -f etc/user-api.yaml
+run-search-api:
+	cd service/search/api; \
+	go run search.go -f etc/search-api.yaml
+generate-user-rpc:
+	cd service/user/rpc; \
+	goctl rpc proto -src user.proto -dir .
+run-user-rpc:
+	cd service/user/rpc; \
+	go run user.go -f etc/user.yaml
