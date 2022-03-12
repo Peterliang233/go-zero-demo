@@ -8,7 +8,7 @@ type LoginReq struct {
 
 type LoginReply struct {
 	Id           int64  `json:"id"`
-	Name         string `json:"name"`
+	Username     string `json:"username"`
 	Gender       string `json:"gender"`
 	AccessToken  string `json:"accessToken"`
 	AccessExpire int64  `json:"accessExpire"`
@@ -20,8 +20,8 @@ type IdReq struct {
 }
 
 type UserInfoReply struct {
-	Id     int64  `json:"id"`
-	Name   string `json:"name"`
-	Number string `json:"number"`
-	Gender string `json:"gender"`
+	Id       int64  `json:"id"`
+	Username string `json:"username"`
+	Number   string `json:"number"`
+	Gender   string `json:"gender"`
 }

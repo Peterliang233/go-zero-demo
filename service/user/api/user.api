@@ -6,7 +6,7 @@ type (
 
 	LoginReply {
 		Id           int64  `json:"id"`
-		Name         string `json:"name"`
+		Username     string `json:"username"`
 		Gender       string `json:"gender"`
 		AccessToken  string `json:"accessToken"`
 		AccessExpire int64  `json:"accessExpire"`
@@ -18,16 +18,22 @@ type (
 	}
 
 	UserInfoReply {
-		Id     int64  `json:"id"`
-		Name   string `json:"name"`
-		Number string `json:"number"`
-		Gender string `json:"gender"`
+		Id       int64  `json:"id"`
+		Username string `json:"username"`
+		Number   string `json:"number"`
+		Gender   string `json:"gender"`
 	}
 )
 
 service user-api {
 	@handler login
 	post /user/login (LoginReq) returns (LoginReply)
+}
+
+@server (
+	jwt: Auth
+)
+service user-api {
 	@handler GetUser
 	get /user (IdReq) returns (UserInfoReply)
 }

@@ -17,11 +17,17 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/user/login",
 				Handler: loginHandler(serverCtx),
 			},
+		},
+	)
+
+	engine.AddRoutes(
+		[]rest.Route{
 			{
 				Method:  http.MethodGet,
 				Path:    "/user",
 				Handler: GetUserHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 }

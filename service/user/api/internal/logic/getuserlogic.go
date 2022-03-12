@@ -2,7 +2,6 @@ package logic
 
 import (
 	"book/common/errorx"
-	"book/service/user/rpc/userclient"
 	"context"
 
 	"book/service/user/api/internal/svc"
@@ -26,17 +25,15 @@ func NewGetUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) GetUserLog
 }
 
 func (l *GetUserLogic) GetUser(req types.IdReq) (*types.UserInfoReply, error) {
-	userInfo, err := l.svcCtx.UserRpc.GetUser(l.ctx, &userclient.IdReq{
-		Id: req.Id,
-	})
+	userInfo, err := l.svcCtx.UserModel.FindOne(req.Id)
 	if err != nil {
 		return nil, errorx.NewDefaultError("参数请求错误")
 	}
 
 	return &types.UserInfoReply{
-		Id:     userInfo.Id,
-		Name:   userInfo.Name,
-		Number: userInfo.Number,
-		Gender: userInfo.Gender,
+		Id:       userInfo.Id,
+		Username: userInfo.Username,
+		Number:   userInfo.Number,
+		Gender:   userInfo.Gender,
 	}, nil
 }
