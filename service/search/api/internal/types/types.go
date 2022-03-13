@@ -9,3 +9,15 @@ type SearchReply struct {
 	Name  string `json:"name"`
 	Count int    `json:"count"`
 }
+
+type RegistryReq struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Number   string `json:"number"`
+	Gender   string `json:"gender"`
+}
+
+type RegistryResp struct {
+	Detail   string `json:"detail"`
+	Username string `json:"username"`
+}

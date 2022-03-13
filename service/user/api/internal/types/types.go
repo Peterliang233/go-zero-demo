@@ -15,6 +15,20 @@ type LoginReply struct {
 	RefreshAfter int64  `json:"refreshAfter"`
 }
 
+type RegistryReq struct {
+	Username string `json:"username"`
+	Number   string `json:"number"`
+	Gender   string `json:"gender"`
+	Password string `json:"password"`
+}
+
+type RegistryResp struct {
+	Username string `json:"username"`
+	Number   string `json:"number"`
+	Gender   string `json:"gender"`
+	Detail   string `json:"detail"`
+}
+
 type IdReq struct {
 	Id int64 `json:"id"`
 }

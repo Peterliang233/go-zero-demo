@@ -6,7 +6,22 @@ type (
 		Name  string `json:"name"`
 		Count int    `json:"count"`
 	}
+	RegistryReq {
+		Username string `json:"username"`
+		Password string `json:"password"`
+		Number   string `json:"number"`
+		Gender   string `json:"gender"`
+	}
+	RegistryResp {
+		Detail   string `json:"detail"`
+		Username string `json:"username"`
+	}
 )
+
+service search-api {
+	@handler user
+	post /user/registry (RegistryReq) returns (RegistryResp)
+}
 
 @server(
 	jwt: Auth

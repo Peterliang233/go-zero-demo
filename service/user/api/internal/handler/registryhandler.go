@@ -3,22 +3,22 @@ package handler
 import (
 	"net/http"
 
-	"book/service/search/api/internal/logic"
-	"book/service/search/api/internal/svc"
-	"book/service/search/api/internal/types"
+	"book/service/user/api/internal/logic"
+	"book/service/user/api/internal/svc"
+	"book/service/user/api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func searchHandler(ctx *svc.ServiceContext) http.HandlerFunc {
+func registryHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.SearchReq
+		var req types.RegistryReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.Error(w, err)
 			return
 		}
 
-		l := logic.NewSearchLogic(r.Context(), ctx)
-		resp, err := l.Search(req)
+		l := logic.NewRegistryLogic(r.Context(), svcCtx)
+		resp, err := l.Registry(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

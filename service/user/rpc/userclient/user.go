@@ -8,7 +8,7 @@ import (
 
 	"book/service/user/rpc/user"
 
-	"github.com/tal-tech/go-zero/zrpc"
+	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 
@@ -16,11 +16,14 @@ type (
 	IdReq         = user.IdReq
 	LoginReply    = user.LoginReply
 	LoginReq      = user.LoginReq
+	RegistryReq   = user.RegistryReq
+	RegistryResp  = user.RegistryResp
 	UserInfoReply = user.UserInfoReply
 
 	User interface {
 		GetUser(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*UserInfoReply, error)
 		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginReply, error)
+		Registry(ctx context.Context, in *RegistryReq, opts ...grpc.CallOption) (*RegistryResp, error)
 	}
 
 	defaultUser struct {
@@ -42,4 +45,9 @@ func (m *defaultUser) GetUser(ctx context.Context, in *IdReq, opts ...grpc.CallO
 func (m *defaultUser) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginReply, error) {
 	client := user.NewUserClient(m.cli.Conn())
 	return client.Login(ctx, in, opts...)
+}
+
+func (m *defaultUser) Registry(ctx context.Context, in *RegistryReq, opts ...grpc.CallOption) (*RegistryResp, error) {
+	client := user.NewUserClient(m.cli.Conn())
+	return client.Registry(ctx, in, opts...)
 }

@@ -4,8 +4,8 @@ import (
 	"book/service/search/api/internal/config"
 	"book/service/search/api/internal/middleware"
 	"book/service/user/rpc/userclient"
-	"github.com/tal-tech/go-zero/rest"
-	"github.com/tal-tech/go-zero/zrpc"
+	"github.com/zeromicro/go-zero/rest"
+	"github.com/zeromicro/go-zero/zrpc"
 )
 
 type ServiceContext struct {

@@ -26,7 +26,20 @@ message LoginReply {
   string gender = 3;
 }
 
+message RegistryReq {
+  string username = 1;
+  string password = 2;
+  string number = 3;
+  string gender = 4;
+}
+
+message RegistryResp {
+  string username = 1;
+  string detail = 2;
+}
+
 service user {
   rpc getUser(IdReq) returns (UserInfoReply);
   rpc Login(LoginReq) returns (LoginReply);
+  rpc Registry(RegistryReq) returns (RegistryResp);
 }

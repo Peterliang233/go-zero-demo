@@ -13,6 +13,19 @@ type (
 		RefreshAfter int64  `json:"refreshAfter"`
 	}
 
+	RegistryReq {
+		Username string `json:"username"`
+		Number   string `json:"number"`
+		Gender   string `json:"gender"`
+		Password string `json:"password"`
+	}
+	RegistryResp {
+		Username string `json:"username"`
+		Number   string `json:"number"`
+		Gender   string `json:"gender"`
+		Detail   string `json:"detail"`
+	}
+
 	IdReq {
 		Id int64 `json:"id"`
 	}
@@ -28,6 +41,8 @@ type (
 service user-api {
 	@handler login
 	post /user/login (LoginReq) returns (LoginReply)
+	@handler registry
+	post /user/registry (RegistryReq) returns (RegistryResp)
 }
 
 @server (
