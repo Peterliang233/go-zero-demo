@@ -4,11 +4,10 @@
 package server
 
 import (
-	"context"
-
 	"book/service/user/rpc/internal/logic"
 	"book/service/user/rpc/internal/svc"
 	"book/service/user/rpc/user"
+	"context"
 )
 
 type UserServer struct {

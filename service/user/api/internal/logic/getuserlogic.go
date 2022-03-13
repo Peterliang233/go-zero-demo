@@ -1,13 +1,12 @@
 package logic
 
 import (
-	"book/common/errorx"
 	"context"
 
 	"book/service/user/api/internal/svc"
 	"book/service/user/api/internal/types"
 
-	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type GetUserLogic struct {
@@ -24,16 +23,8 @@ func NewGetUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) GetUserLog
 	}
 }
 
-func (l *GetUserLogic) GetUser(req types.IdReq) (*types.UserInfoReply, error) {
-	userInfo, err := l.svcCtx.UserModel.FindOne(req.Id)
-	if err != nil {
-		return nil, errorx.NewDefaultError("参数请求错误")
-	}
+func (l *GetUserLogic) GetUser(req types.IdReq) (resp *types.UserInfoReply, err error) {
+	// todo: add your logic here and delete this line
 
-	return &types.UserInfoReply{
-		Id:       userInfo.Id,
-		Username: userInfo.Username,
-		Number:   userInfo.Number,
-		Gender:   userInfo.Gender,
-	}, nil
+	return
 }

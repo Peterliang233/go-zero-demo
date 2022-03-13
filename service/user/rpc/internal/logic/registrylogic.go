@@ -9,7 +9,7 @@ import (
 	"book/service/user/rpc/internal/svc"
 	"book/service/user/rpc/user"
 
-	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type RegistryLogic struct {
@@ -31,7 +31,7 @@ func (l *RegistryLogic) Registry(req *user.RegistryReq) (*user.RegistryResp, err
 		len(strings.TrimSpace(req.Gender)) == 0 || len(strings.TrimSpace(req.Number)) == 0 {
 		return nil, errorx.NewDefaultError("存在请求参数为空")
 	}
-	u := model.User{
+	u := &model.User{
 		Number:   req.Number,
 		Gender:   req.Gender,
 		Username: req.Username,

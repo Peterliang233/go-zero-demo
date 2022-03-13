@@ -1,17 +1,16 @@
 package main
 
 import (
-	"flag"
-	"fmt"
-
 	"book/service/user/rpc/internal/config"
 	"book/service/user/rpc/internal/server"
 	"book/service/user/rpc/internal/svc"
 	"book/service/user/rpc/user"
+	"flag"
+	"fmt"
 
-	"github.com/tal-tech/go-zero/core/conf"
-	"github.com/tal-tech/go-zero/core/service"
-	"github.com/tal-tech/go-zero/zrpc"
+	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/core/service"
+	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -29,12 +28,9 @@ func main() {
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		user.RegisterUserServer(grpcServer, srv)
 
-		switch c.Mode {
-		case service.DevMode, service.TestMode:
+		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)
-		default:
 		}
-
 	})
 	defer s.Stop()
 

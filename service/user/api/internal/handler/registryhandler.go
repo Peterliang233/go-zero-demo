@@ -1,11 +1,11 @@
 package handler
 
 import (
-	"net/http"
-
 	"book/service/user/api/internal/logic"
 	"book/service/user/api/internal/svc"
 	"book/service/user/api/internal/types"
+	"net/http"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

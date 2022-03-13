@@ -1,22 +1,15 @@
 package config
 
 import (
-	"github.com/tal-tech/go-zero/core/stores/cache"
-	"github.com/tal-tech/go-zero/rest"
+	"github.com/zeromicro/go-zero/rest"
+	"github.com/zeromicro/go-zero/zrpc"
 )
 
 type Config struct {
 	rest.RestConf
-	// 配置jwt进行鉴权
-	Auth struct { // jwt鉴权配置
-		AccessSecret string // jwt密钥
-		AccessExpire int64  // 有效期，单位：秒
+	Auth struct {
+		AccessSecret string
+		AccessExpire int64
 	}
-	Mysql struct {
-		DataSource string
-	}
-
-	//UserRpc zrpc.RpcClientConf
-
-	CacheRedis cache.CacheConf
+	UserRpc zrpc.RpcClientConf
 }

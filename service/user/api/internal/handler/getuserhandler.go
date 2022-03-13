@@ -1,15 +1,14 @@
 package handler
 
 import (
-	"net/http"
-
 	"book/service/user/api/internal/logic"
 	"book/service/user/api/internal/svc"
 	"book/service/user/api/internal/types"
-	"github.com/tal-tech/go-zero/rest/httpx"
+	"github.com/zeromicro/go-zero/rest/httpx"
+	"net/http"
 )
 
-func GetUserHandler(ctx *svc.ServiceContext) http.HandlerFunc {
+func GetUserHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.IdReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,7 +16,7 @@ func GetUserHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewGetUserLogic(r.Context(), ctx)
+		l := logic.NewGetUserLogic(r.Context(), svcCtx)
 		resp, err := l.GetUser(req)
 		if err != nil {
 			httpx.Error(w, err)
