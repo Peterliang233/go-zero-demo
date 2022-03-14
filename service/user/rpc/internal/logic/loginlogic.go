@@ -6,7 +6,6 @@ import (
 	"book/service/user/rpc/internal/svc"
 	"book/service/user/rpc/user"
 	"context"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 

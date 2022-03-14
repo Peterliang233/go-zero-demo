@@ -4,6 +4,8 @@ import (
 	"book/common/errorx"
 	"book/service/user/rpc/userclient"
 	"context"
+	"fmt"
+	"github.com/golang-jwt/jwt/v4"
 	"strings"
 
 	"book/service/user/api/internal/svc"
@@ -38,8 +40,25 @@ func (l *LoginLogic) Login(req types.LoginReq) (resp *types.LoginReply, err erro
 	if err != nil {
 		return nil, errorx.NewDefaultError("登录错误")
 	}
+	token, err := l.getJwtToken(l.svcCtx.Config.Auth.AccessSecret,
+		1, l.svcCtx.Config.Auth.AccessExpire, UserInfo.GetId())
+	fmt.Println(err)
+	if err != nil {
+		return nil, errorx.NewDefaultError("获取token失败")
+	}
 	return &types.LoginReply{
-		Username: UserInfo.Name,
-		Gender:   UserInfo.Gender,
+		Username:    UserInfo.Name,
+		Gender:      UserInfo.Gender,
+		AccessToken: token,
 	}, nil
+}
+
+func (l *LoginLogic) getJwtToken(secret string, iat, seconds, userId int64) (string, error) {
+	claims := make(jwt.MapClaims)
+	claims["exp"] = iat + seconds
+	claims["iat"] = iat
+	claims["userId"] = userId
+	token := jwt.New(jwt.SigningMethodHS256)
+	token.Claims = claims
+	return token.SignedString([]byte(secret))
 }
