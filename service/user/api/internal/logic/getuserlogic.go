@@ -6,7 +6,6 @@ import (
 	"book/service/user/api/internal/types"
 	"book/service/user/rpc/userclient"
 	"context"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -30,7 +29,7 @@ func (l *GetUserLogic) GetUser(req types.IdReq) (resp *types.UserInfoReply, err 
 			Id: req.Id,
 		})
 	if err != nil {
-		return nil, errorx.NewDefaultError("获取用户信息失败,请检查后重试")
+		return nil, errorx.NewCodeError(500, "获取用户信息失败,请检查后重试")
 	}
 	return &types.UserInfoReply{
 		Id:       userInfo.GetId(),

@@ -27,7 +27,7 @@ type (
 	}
 
 	IdReq {
-		Id int64 `json:"id"`
+		Id int64 `form:"id"`
 	}
 
 	UserInfoReply {

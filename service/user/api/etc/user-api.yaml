@@ -8,7 +8,7 @@ CacheRedis:
     Pass: redispassword
     Type: node
 Auth:
-  AccessSecret: "131312313"
+  AccessSecret: "13131882313"
   AccessExpire: 6000
 UserRpc:
   Etcd:

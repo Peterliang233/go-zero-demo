@@ -30,7 +30,7 @@ type RegistryResp struct {
 }
 
 type IdReq struct {
-	Id int64 `json:"id"`
+	Id int64 `form:"id"`
 }
 
 type UserInfoReply struct {
